@@ -1,0 +1,47 @@
+########## This is the overall config file for uQlust ##########
+##########               uQlust ver. 1.0              ##########
+########## Based on Adamczak and Meller 2011, 2015    ##########
+########## Please see uQlust_manual.pdf for details   ##########
+##########    Beware of broken lines. Good luck!      ##########
+##########                                            ##########
+##########                                            ##########
+##########          INPUT SECTION                     ##########
+##########                                            ##########
+########## Input files with structures or models to be analyzed are defined below ##########
+List of aligned profile files# generatedProfiles/troponin_Calpha;
+##########    End of input file section               ##########
+##########                                            ##########
+##########          OUTPUT SECTION                    ##########
+##########                                            ##########
+##########  Output and temporary files are defined below        ##########
+Output file name# out.txt
+##########   End of output file section               ##########
+##########                                            ##########
+##########          WORKFLOW SECTION                  ##########
+##########                                            ##########
+########## Ranking using 1D-jury, i.e., uQlust:1D-ProfileName='Jury1D'; profile to be defined in the next section #########
+Cluster algorithm to be used (available: uQlustTree, HKmeans, HierarchicalCluster, FastHCluster, Kmeans, ThresholdCluster, Jury1D, Jury3D, Sift)#Jury1D;HashCluster;uQlustTree
+##########    End of workflow type section            ##########
+##########                                            ##########
+##########          PROFILE SECTION                   ##########
+##########                                            ##########
+########## Profile type to be used is defined by an xml file defined below ##########
+##### Parameters other #######################
+Path to the profile for 1Djury [OTHER]# profiles/SS3_SA9_jury.profiles
+########## End ##########
+##### Parameters Hash #######################
+Number of relevant clusters# 10
+Percent of data that must be in the relevant clusters# 90
+Use 1Djury to find consesnsus states # True
+Profile name# profiles/SS3_SA9_jury.profiles
+Combine clusters based on the hamming distance between them# False
+Find clusters by automatic columns selection# true
+Columns selection method# ENTROPY
+########## End ##########
+########## Parameters hierarchical #######################
+Profile name# profiles/SS3_SA9_jury.profiles
+Hash req clusters# 1000
+Distance measures used for clustering# HAMMING
+Use 1DJury to find reference vectors in hash# True
+Needed for aglomerative clustering, defines type of linkage# AVERAGE
+########## End ##########

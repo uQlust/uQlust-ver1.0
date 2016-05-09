@@ -1,0 +1,34 @@
+########## This is the overall config file for uQlust ##########
+##########               uQlust ver. 1.0              ##########
+########## Based on Adamczak and Meller 2011, 2015    ##########
+########## Please see uQlust_manual.pdf for details   ##########
+##########    Beware of broken lines. Good luck!      ##########
+##########                                            ##########
+##########                                            ##########
+##########          INPUT SECTION                     ##########
+##########                                            ##########
+########## Input files with structures or models to be analyzed are defined below ##########
+Path to data directory# data/rna/1a4d_/1a4d_pdbs;
+##########    End of input file section               ##########
+##########                                            ##########
+##########          OUTPUT SECTION                    ##########
+##########                                            ##########
+##########  Output and temporary files are defined below        ##########
+Output file name# out.txt
+##########   End of output file section               ##########
+##########                                            ##########
+##########          WORKFLOW SECTION                  ##########
+##########                                            ##########
+########## Ranking using 1D-jury, i.e., uQlust:1D-ProfileName='Jury1D'; profile to be defined in the next section #########
+Cluster algorithm to be used (available: uQlustTree, HKmeans, HierarchicalCluster, FastHCluster, Kmeans, ThresholdCluster, Jury1D, Jury3D, Sift)# Kmeans
+##########    End of workflow type section            ##########
+##########                                            ##########
+##########          PROFILE SECTION                   ##########
+##########                                            ##########
+########## Profile type to be used is defined by an xml file defined below ##########
+########## Parameters kmeans #######################
+K-means algorithm: How To initialize k-means (RANDOM,JURY1D)# RANDOM
+Distance measures used for clustering# RMSD
+In case of RMSD or MAXSUB which atoms should be used# ALL_ATOMS
+Max number of iterations [KMEANS]# 300
+K-means algorithm: K in K-means# 10
