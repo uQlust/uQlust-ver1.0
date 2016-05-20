@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Settings xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <gFileName>F:\gitUQlustTMP\binary\Settings.clu</gFileName>
+  <dir>F:\gitUQlustTMP\binary</dir>
+  <numberOfCores>1</numberOfCores>
+  <extension>*.pdb</extension>
+  <profilesDir>/home/raad/work/gitUQlustTMP/binary/generatedProfiles</profilesDir>
+  <mode>PROTEIN</mode>
+</Settings>
