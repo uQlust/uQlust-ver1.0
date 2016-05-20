@@ -604,7 +604,9 @@ namespace uQlustCore
         public void MakeProfiles(DCDFile dcd=null)
         {
             int active = 0;
-
+            List<profileNode> prof = GetActiveProfiles();
+            if (prof == null)
+                return;
             profilesNum = GetActiveProfiles().Count;
             profilesProgress=new List<double>(profilesNum);            
 
@@ -688,6 +690,7 @@ namespace uQlustCore
         {
             List<profileNode> active = GetActiveProfiles();
 
+            if(active!=null)
             foreach (var item in active)
                 if (item.profProgram.Length > 0)
                     return false;
@@ -728,7 +731,8 @@ namespace uQlustCore
 
             Queue<profileNode> nodeList = new Queue<profileNode>();
             profileNode aux;
-
+            if (masterNode.Count == 0)
+                return null;
             foreach (var item in masterNode.Values)
                 if (item.active)
                 {

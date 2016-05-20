@@ -15,9 +15,20 @@ namespace Graph
     public partial class InternalProfileForm : Form
     {
         public profileNode localNode = new profileNode();
-        public InternalProfileForm(profileNode node,bool flag=true)
+        public InternalProfileForm(profileNode node,filterOPT filter,bool flag=true)
         {
             InitializeComponent();
+            if(filter==filterOPT.SIMILARITY)
+            {
+                button4.Visible = false;
+                button3.Visible = true;
+            }
+            else
+            {
+                button4.Visible = true;
+                button3.Visible = false;
+
+            }
             if (node == null)
                 return;
            

@@ -15,13 +15,18 @@ using uQlustCore.Profiles;
 
 namespace Graph
 {
-    
+    public enum filterOPT
+    {
+        SIMILARITY,
+        DISTANCE
+    };
     public partial class ProfileForm : Form
     {        
         ProfileTree treeProfiles;
         public string fileName="defualt.profile";
         public string alignFileName;
-        public ProfileForm(string fileName,string alignFile)
+        private filterOPT filter;
+        public ProfileForm(string fileName,string alignFile,filterOPT filter)
         {
             InitializeComponent();
             if (fileName == null || fileName.Length == 0)
@@ -32,7 +37,7 @@ namespace Graph
                 this.fileName = fileName;
             }
 
-
+            this.filter = filter;
             //profilesView.DrawMode = TreeViewDrawMode.OwnerDrawText;
             
             treeProfiles = new ProfileTree();
@@ -135,7 +140,7 @@ namespace Graph
                     node = treeProfiles.FindNode(Path);
                     if (node.internalName!=null)
                     {
-                        internalDef = new InternalProfileForm(node);
+                        internalDef = new InternalProfileForm(node,filter);
                         res = internalDef.ShowDialog();
                         if (res == DialogResult.OK)
                         {
@@ -191,9 +196,9 @@ namespace Graph
                         InternalProfileForm intForm;
                         profileNode localNode = InternalProfilesManager.GetNode(intr.selectedProfile);
                         if(localNode.profName.Contains("Load"))
-                            intForm = new InternalProfileForm(localNode,false);
+                            intForm = new InternalProfileForm(localNode,filter,false);
                         else
-                            intForm = new InternalProfileForm(localNode);
+                            intForm = new InternalProfileForm(localNode,filter);
 
                         res = intForm.ShowDialog();
                         if (res == DialogResult.OK)
@@ -436,7 +441,10 @@ namespace Graph
         private bool SaveAs()
         {
             DialogResult res;
-            saveFileDialog1.Filter = "Profiles file (*.profiles)|*.profiles";
+            if(filter==filterOPT.SIMILARITY)
+                saveFileDialog1.Filter = "Profiles file (*jury.profiles)|*jury.profiles";
+            else
+                saveFileDialog1.Filter = "Profiles file (*distance.profiles)|*distance.profiles";
             string dir = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
 
             if (Directory.Exists(dir + Path.DirectorySeparatorChar + "profiles"))
@@ -447,6 +455,12 @@ namespace Graph
             {
 
                 string profileNameFile = saveFileDialog1.FileName;
+                if(filter==filterOPT.SIMILARITY)
+                    if(!profileNameFile.EndsWith("jury.profiles"))
+                        profileNameFile = saveFileDialog1.FileName+"jury.profiles";
+                else
+                    if(!profileNameFile.EndsWith("distance.profiles"))
+                        profileNameFile = saveFileDialog1.FileName + "distance.profiles";
                 this.Text = profileNameFile;
                 treeProfiles.SaveProfiles(profileNameFile);
                 fileName = profileNameFile;
@@ -462,7 +476,10 @@ namespace Graph
         private void toolLoad_Click(object sender, EventArgs e)
         {
             DialogResult res;
-            openFileDialog1.Filter = "Profiles file (*.profiles)|*.profiles";
+            if(filter==filterOPT.SIMILARITY)
+                openFileDialog1.Filter = "Profiles file (*jury.profiles)|*jury.profiles";
+            else
+                openFileDialog1.Filter = "Profiles file (*distance.profiles)|*distance.profiles";
             string dir = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
 
             if (Directory.Exists(dir + Path.DirectorySeparatorChar + "profiles"))

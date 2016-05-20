@@ -259,7 +259,7 @@ namespace Graph
         {
             ProfileForm profDef;
 
-            profDef = new ProfileForm(profileFileName, "");
+            profDef = new ProfileForm(profileFileName, "",filterOPT.DISTANCE);
 
 
             DialogResult res = profDef.ShowDialog();
@@ -287,12 +287,13 @@ namespace Graph
             inputMode = tree.GetModes();
             List<profileNode> active = tree.GetActiveProfiles();
             outStr = "Active profiles: ";
-            for (int i = 0; i < active.Count; i++)
-            {
-                outStr += active[i].profName;
-                if (i < active.Count - 1)
-                    outStr += ", ";
-            }
+            if(active!=null)
+                for (int i = 0; i < active.Count; i++)
+                {
+                    outStr += active[i].profName;
+                    if (i < active.Count - 1)
+                        outStr += ", ";
+                }
 
             return outStr;
         }

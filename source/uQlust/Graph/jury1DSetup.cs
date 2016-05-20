@@ -16,6 +16,7 @@ namespace Graph
     public partial class jury1DSetup : UserControl
     {
         private string fileName;
+        
         public ProfileNameChanged profileNameChanged=null;
 
         private string ProfileName=null;
@@ -47,7 +48,7 @@ namespace Graph
           
            ProfileForm profDef;
 
-            profDef = new ProfileForm(profileName, "");
+            profDef = new ProfileForm(profileName, "",filterOPT.SIMILARITY);
 
             DialogResult res = profDef.ShowDialog();
             if (res == DialogResult.OK)
@@ -84,16 +85,24 @@ namespace Graph
         {
             string outStr = "";
             ProfileTree tree = new ProfileTree();
-            tree.LoadProfiles(fileName);
+            try
+            {
+                tree.LoadProfiles(fileName);
+            }
+            catch(Exception ex)
+            {
+                label2.Text = "";
+            }
             inputMode = tree.GetModes();
             List<profileNode> active = tree.GetActiveProfiles();
             outStr = "Active profiles: ";
-            for (int i = 0; i < active.Count; i++)
-            {
-                outStr += active[i].profName;
-                if (i < active.Count - 1)
-                    outStr += ", ";
-            }
+            if(active!=null)
+                for (int i = 0; i < active.Count; i++)
+                {
+                    outStr += active[i].profName;
+                    if (i < active.Count - 1)
+                        outStr += ", ";
+                }
 
             return outStr;
         }
